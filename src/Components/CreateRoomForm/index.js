@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+const helpers = require('../../helpers');
 
 const CreateRoomForm = () => {
   const [name, setName] = useState('');
@@ -9,6 +10,15 @@ const CreateRoomForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  };
+
+  const generateRoomCode = () => {
+    const bank = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    let roomCode = '';
+    for (let i = 0; i < 4; i++) {
+      roomCode += bank[helpers.getRandom(bank.length - 1)];
+    }
+    return roomCode;
   };
 
   return (
