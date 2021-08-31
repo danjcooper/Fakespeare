@@ -18,9 +18,16 @@ const CreateRoomForm = () => {
     for (let i = 0; i < 4; i++) {
       roomCode += bank[helpers.getRandom(bank.length - 1)];
     }
+
+    // TODO check if code appears in lists of bad words, if it does run the function again.
+
+    const tempBannedWords = ['SHIT', 'FUCK', 'DICK', 'CUNT'];
+
+    if (tempBannedWords.includes(roomCode)) {
+      generateRoomCode();
+    }
     return roomCode;
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <input
