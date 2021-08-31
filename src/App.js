@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { CreateRoomForm, JoinRoomForm, Nav } from './Components';
+import { Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Nav />
+      <Switch>
+        <Route exact path='/'>
+          <h1>Welcome to book app - name tbc</h1>
+        </Route>
+        <Route exact path='/join'>
+          <JoinRoomForm />
+        </Route>
+        <Route exact path='/create'>
+          <CreateRoomForm />
+        </Route>
+        <Route>
+          <h1>404, not found</h1>
+        </Route>
+      </Switch>
     </div>
   );
 }
