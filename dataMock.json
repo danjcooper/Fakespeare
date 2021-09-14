@@ -1,0 +1,30 @@
+[
+  {
+    "Round1": {
+      "book": {
+        "blurb": "this is a blurb",
+        "author": "Jane Austin",
+        "title": "Pride & Prejudice",
+        "firstLine": "I am the first line",
+        "lastLine": "I am the last line"
+      },
+      "players": {
+        "TedDanson": {
+          "correctAnswers": 0,
+          "peopleFooled": 0
+        },
+        "Hojo": {
+          "correctAnswers": 0,
+          "peopleFooled": 0
+        }
+      },
+      "answers": {
+        "TedDanson": "I'm rich and sad",
+        "Hojo": "Being posh is hard"
+      },
+      "roundFinished": false
+    }
+  }
+]
+
+// If the number of answers matches the number of players change roundFinished to True and progress the game.
