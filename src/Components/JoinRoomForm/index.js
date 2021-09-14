@@ -44,7 +44,11 @@ const JoinRoomForm = ({ toggleLogin }) => {
         <Redirect
           to={{
             pathname: '/lobby',
-            state: { username: formData.username, roomCode: formData.roomCode },
+            state: {
+              username: formData.username,
+              roomCode: formData.roomCode.toUpperCase(),
+              roomOwner: false,
+            },
           }}
         />
       ) : null}

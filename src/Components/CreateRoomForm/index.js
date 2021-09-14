@@ -48,7 +48,7 @@ const CreateRoomForm = ({ toggleLogin }) => {
         <Redirect
           to={{
             pathname: '/lobby',
-            state: { username: name, roomCode: roomCode },
+            state: { username: name, roomCode: roomCode, roomOwner: true },
           }}
         />
       ) : null}
