@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CreateRoomForm, JoinRoomForm, Nav } from './Components';
-import { Game } from './Pages';
+import { Lobby, Game } from './Pages';
 import { Switch, Route } from 'react-router-dom';
 
 function App() {
@@ -24,6 +24,9 @@ function App() {
           )}
         </Route>
         <Route exact path='/lobby'>
+          <Lobby />
+        </Route>
+        <Route exact path='/game'>
           <Game />
         </Route>
         <Route>
