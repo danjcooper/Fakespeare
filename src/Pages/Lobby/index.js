@@ -79,6 +79,7 @@ const Game = () => {
             pathname: '/game',
             state: {
               roomCode: roomCode.toUpperCase(),
+              owner: owner,
             },
           }}
         />
