@@ -80,6 +80,7 @@ const Game = () => {
             state: {
               roomCode: roomCode.toUpperCase(),
               owner: owner,
+              playerList: playerList,
             },
           }}
         />
