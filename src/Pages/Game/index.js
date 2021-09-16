@@ -6,14 +6,25 @@ import axios from 'axios';
 import { socket } from '../../services/socket';
 
 const Game = () => {
+  const GAME_STATUS = {
+    LOADING: 'loading',
+    ANSWERING: 'answering',
+    WAITING: 'waiting',
+    GUESSING: 'guessing',
+    ROUND_END: 'round end',
+    GAME_END: 'game end',
+  };
+
   const location = useLocation();
   const questions = ['last_line', 'first_line'];
+
   const [roomCode, setRoomCode] = useState(location.state.roomCode);
   const [owner, setOwner] = useState(location.state.owner);
   const [userName, setUserName] = useState(location.state.userName);
   const [playerList, setPlayerList] = useState(location.state.playerList);
   const [roundNumber, setRoundNumber] = useState(0);
   const [roundAnswers, setRoundAnswers] = useState([]);
+  const [gameStatus, setGameStatus] = useState(GAME_STATUS.LOADING);
   const [books, setBooks] = useState([]);
   const [gameData, setGameData] = useState([]);
 
@@ -29,6 +40,7 @@ const Game = () => {
         });
 
         setBooks(booksFromApi.data);
+        setGameStatus(GAME_STATUS.ANSWERING);
       };
 
       playerList.forEach((player) => {
@@ -62,16 +74,23 @@ const Game = () => {
     socket.on('book list', (bookList) => {
       if (!owner) {
         setBooks(bookList);
+        setGameStatus(GAME_STATUS.ANSWERING);
       }
+    });
+
+    socket.on('update status', (status) => {
+      setGameStatus(status);
     });
   }, []);
 
   useEffect(() => {
-    console.log('RA trig');
-    console.log('RA len', roundAnswers.length);
-    console.log('PL len', playerList.length);
     if (roundAnswers.length === playerList.length) {
       setRoundNumber((prevState) => prevState + 1);
+      setGameStatus(GAME_STATUS.ROUND_END);
+      socket.emit('update status', {
+        roomCode: roomCode,
+        status: GAME_STATUS.ROUND_END,
+      });
     }
   }, [roundAnswers]);
 
@@ -85,6 +104,7 @@ const Game = () => {
       setRoundAnswers((prevState) => {
         let temp = prevState.slice(0);
         temp.push({ userName: userName, answer: e.target.answer.value });
+        setGameStatus(GAME_STATUS.WAITING);
         return temp;
       });
     } else {
@@ -93,18 +113,44 @@ const Game = () => {
         userName: userName,
         answer: e.target.answer.value,
       });
+      setGameStatus(GAME_STATUS.WAITING);
+    }
+  };
+
+  const selectRenderComponment = () => {
+    switch (gameStatus) {
+      case GAME_STATUS.LOADING:
+        return <h1>Loading</h1>;
+
+      case GAME_STATUS.ANSWERING:
+        return books.length > 0 ? (
+          <GameAnswerSubmit
+            bookInfo={books[roundNumber]}
+            handleSubmit={handleAnswer}
+          />
+        ) : (
+          <h1>loading</h1>
+        );
+
+      case GAME_STATUS.WAITING:
+        return <h1>Waiting</h1>;
+
+      case GAME_STATUS.ROUND_END:
+        return <h1>Round End</h1>;
+
+      case GAME_STATUS.GAME_END:
+        return <h1>Game End</h1>;
+
+      default:
+        return <h1>Default</h1>;
     }
   };
 
   return (
     <>
       <h1>I am the game</h1>
-      {books.length > 0 ? (
-        <GameAnswerSubmit
-          bookInfo={books[roundNumber]}
-          handleSubmit={handleAnswer}
-        />
-      ) : null}
+
+      {selectRenderComponment()}
     </>
   );
 };
