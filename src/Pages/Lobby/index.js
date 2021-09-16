@@ -81,6 +81,7 @@ const Game = () => {
               roomCode: roomCode.toUpperCase(),
               owner: owner,
               playerList: playerList,
+              userName: userName,
             },
           }}
         />

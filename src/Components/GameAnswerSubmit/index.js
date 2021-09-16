@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GameAnswerSubmit = ({ bookInfo }) => {
+const GameAnswerSubmit = ({ bookInfo, handleSubmit }) => {
   return (
     <section>
       <p>
@@ -16,8 +16,8 @@ const GameAnswerSubmit = ({ bookInfo }) => {
         <h2>Make up the last Line</h2>
       )}
 
-      <form>
-        <input type='text' />
+      <form onSubmit={handleSubmit}>
+        <input id='answer' type='text' />
         <button type='submit'>Submit</button>
       </form>
     </section>
