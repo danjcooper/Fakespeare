@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GameAnswerSubmit, PlayerList } from '../../Components';
+import { GameAnswerSubmit, GameGuessingComponent } from '../../Components';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 // import { PlayerList } from '../../Components';
@@ -24,6 +24,8 @@ const Game = () => {
   const [playerList, setPlayerList] = useState(location.state.playerList);
   const [roundNumber, setRoundNumber] = useState(0);
   const [roundAnswers, setRoundAnswers] = useState([]);
+  const [roundGuesses, setRoundGuesses] = useState([]);
+
   const [gameStatus, setGameStatus] = useState(GAME_STATUS.LOADING);
   const [books, setBooks] = useState([]);
   const [gameData, setGameData] = useState([]);
@@ -68,6 +70,16 @@ const Game = () => {
         }
       });
 
+      socket.on('submit guess', (data) => {
+        if (owner) {
+          setRoundGuesses((prevState) => {
+            let newArr = prevState.slice(0);
+            newArr.push({ userName: data.userName, guess: data.guess });
+            return newArr;
+          });
+        }
+      });
+
       loadBooks();
     }
 
@@ -78,6 +90,12 @@ const Game = () => {
       }
     });
 
+    if (!owner) {
+      socket.on('update roundAnswers', (answers) => {
+        setRoundAnswers(answers);
+      });
+    }
+
     socket.on('update status', (status) => {
       setGameStatus(status);
     });
@@ -86,13 +104,35 @@ const Game = () => {
   useEffect(() => {
     if (roundAnswers.length === playerList.length) {
       setRoundNumber((prevState) => prevState + 1);
+      setGameStatus(GAME_STATUS.GUESSING);
+      socket.emit('update roundAnswers', {
+        roomCode: roomCode,
+        answerList: roundAnswers,
+      });
+      socket.emit('update status', {
+        roomCode: roomCode,
+        status: GAME_STATUS.GUESSING,
+      });
+    }
+  }, [roundAnswers]);
+
+  useEffect(() => {
+    if (roundGuesses.length === playerList.length) {
+      // setRoundNumber((prevState) => prevState + 1);
+
+      // TODO calculate the results
+
       setGameStatus(GAME_STATUS.ROUND_END);
+      // socket.emit('update roundAnswers', {
+      //   roomCode: roomCode,
+      //   answerList: roundAnswers,
+      // });
       socket.emit('update status', {
         roomCode: roomCode,
         status: GAME_STATUS.ROUND_END,
       });
     }
-  }, [roundAnswers]);
+  }, [roundGuesses]);
 
   useEffect(() => {
     socket.emit('book list', { roomCode: roomCode, bookList: books });
@@ -117,6 +157,26 @@ const Game = () => {
     }
   };
 
+  const handleGuessSubmit = (e) => {
+    e.preventDefault();
+
+    if (owner) {
+      setRoundGuesses((prevState) => {
+        const newArr = prevState.slice(0);
+        newArr.push({ userName: userName, guess: e.target.answer.value });
+        setGameStatus(GAME_STATUS.WAITING);
+        return newArr;
+      });
+    }
+
+    socket.emit('submit guess', {
+      roomCode: roomCode,
+      userName: userName,
+      guess: e.target.answer.value,
+    });
+    setGameStatus(GAME_STATUS.WAITING);
+  };
+
   const selectRenderComponment = () => {
     switch (gameStatus) {
       case GAME_STATUS.LOADING:
@@ -132,11 +192,30 @@ const Game = () => {
           <h1>loading</h1>
         );
 
+      case GAME_STATUS.GUESSING:
+        return roundAnswers.length > 0 ? (
+          <GameGuessingComponent
+            handleGuessSubmit={handleGuessSubmit}
+            answers={roundAnswers}
+          />
+        ) : (
+          <h1>loading</h1>
+        );
+
       case GAME_STATUS.WAITING:
-        return <h1>Waiting</h1>;
+        return (
+          <h1>
+            waiting for others to submit their answers <br />
+            Library notes on the book go here
+          </h1>
+        );
 
       case GAME_STATUS.ROUND_END:
-        return <h1>Round End</h1>;
+        return (
+          <h1>
+            Round End <br /> results go here
+          </h1>
+        );
 
       case GAME_STATUS.GAME_END:
         return <h1>Game End</h1>;
@@ -146,13 +225,7 @@ const Game = () => {
     }
   };
 
-  return (
-    <>
-      <h1>I am the game</h1>
-
-      {selectRenderComponment()}
-    </>
-  );
+  return <>{selectRenderComponment()}</>;
 };
 
 export default Game;
