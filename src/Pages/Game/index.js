@@ -254,11 +254,19 @@ const Game = () => {
   };
 
   const renderNextRound = () => {
-    setGameStatus(GAME_STATUS.ANSWERING);
-    socket.emit('update status', {
-      roomCode: roomCode,
-      status: GAME_STATUS.ANSWERING,
-    });
+    if (roundNumber >= books.length) {
+      setGameStatus(GAME_STATUS.GAME_END);
+      socket.emit('update status', {
+        roomCode: roomCode,
+        status: GAME_STATUS.GAME_END,
+      });
+    } else {
+      setGameStatus(GAME_STATUS.ANSWERING);
+      socket.emit('update status', {
+        roomCode: roomCode,
+        status: GAME_STATUS.ANSWERING,
+      });
+    }
   };
 
   const selectRenderComponment = () => {
