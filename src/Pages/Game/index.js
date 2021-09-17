@@ -103,8 +103,9 @@ const Game = () => {
 
   useEffect(() => {
     if (roundAnswers.length === playerList.length) {
-      setRoundNumber((prevState) => prevState + 1);
+      // setRoundNumber((prevState) => prevState + 1);
       setGameStatus(GAME_STATUS.GUESSING);
+
       socket.emit('update roundAnswers', {
         roomCode: roomCode,
         answerList: roundAnswers,
@@ -197,6 +198,7 @@ const Game = () => {
           <GameGuessingComponent
             handleGuessSubmit={handleGuessSubmit}
             answers={roundAnswers}
+            correctAnswer={books[roundNumber]}
           />
         ) : (
           <h1>loading</h1>
