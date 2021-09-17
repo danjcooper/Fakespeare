@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { GameAnswerSubmit, GameGuessingComponent } from '../../Components';
+import {
+  GameAnswerSubmit,
+  GameGuessingComponent,
+  GameRoundEnd,
+} from '../../Components';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 // import { PlayerList } from '../../Components';
@@ -102,14 +106,19 @@ const Game = () => {
   }, []);
 
   useEffect(() => {
-    if (roundAnswers.length === playerList.length) {
+    if (
+      roundAnswers.length === playerList.length &&
+      !roundAnswers[0].selectedBy
+    ) {
       // setRoundNumber((prevState) => prevState + 1);
+
       setGameStatus(GAME_STATUS.GUESSING);
 
       socket.emit('update roundAnswers', {
         roomCode: roomCode,
         answerList: roundAnswers,
       });
+
       socket.emit('update status', {
         roomCode: roomCode,
         status: GAME_STATUS.GUESSING,
@@ -122,6 +131,30 @@ const Game = () => {
       // setRoundNumber((prevState) => prevState + 1);
 
       // TODO calculate the results
+
+      roundAnswers.push({
+        userName: books[roundNumber].author,
+        answer: books[roundNumber][books[roundNumber].question],
+      });
+
+      roundAnswers.forEach((answer) => {
+        for (let i = 0; i < roundGuesses.length; i++) {
+          if (answer.answer == roundGuesses[i].guess) {
+            answer.selectedBy
+              ? answer.selectedBy.push(roundGuesses[i].userName)
+              : (answer.selectedBy = [roundGuesses[i].userName]);
+          }
+        }
+
+        if (!answer.selectedBy) {
+          answer.selectedBy = 'nobody 😭';
+        }
+      });
+
+      socket.emit('update roundAnswers', {
+        roomCode: roomCode,
+        answerList: roundAnswers,
+      });
 
       setGameStatus(GAME_STATUS.ROUND_END);
       // socket.emit('update roundAnswers', {
@@ -213,10 +246,10 @@ const Game = () => {
         );
 
       case GAME_STATUS.ROUND_END:
-        return (
-          <h1>
-            Round End <br /> results go here
-          </h1>
+        return roundAnswers[0].selectedBy ? (
+          <GameRoundEnd answers={roundAnswers} />
+        ) : (
+          <h1>loading</h1>
         );
 
       case GAME_STATUS.GAME_END:
