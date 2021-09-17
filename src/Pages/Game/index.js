@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   GameAnswerSubmit,
   GameGuessingComponent,
+  GameResults,
   GameRoundEnd,
 } from '../../Components';
 import { useLocation } from 'react-router-dom';
@@ -17,6 +18,7 @@ const Game = () => {
     GUESSING: 'guessing',
     ROUND_END: 'round end',
     GAME_END: 'game end',
+    RESULTS: 'results',
   };
 
   const location = useLocation();
@@ -98,8 +100,19 @@ const Game = () => {
       });
     }
 
+    if (!owner) {
+      socket.on('update gameData', (gameData) => {
+        setGameData(gameData);
+      });
+    }
+
     socket.on('update status', (status) => {
       setGameStatus(status);
+      if (status === GAME_STATUS.RESULTS) {
+        setRoundAnswers([]);
+        setRoundGuesses([]);
+        setRoundNumber((prevState) => prevState + 1);
+      }
     });
   }, []);
 
@@ -127,8 +140,6 @@ const Game = () => {
   useEffect(() => {
     if (roundGuesses.length === playerList.length) {
       // setRoundNumber((prevState) => prevState + 1);
-
-      // TODO calculate the results
 
       roundAnswers.push({
         userName: books[roundNumber].author,
@@ -174,11 +185,13 @@ const Game = () => {
         answerList: roundAnswers,
       });
 
+      socket.emit('update gameData', {
+        roomCode: roomCode,
+        gameData: gameData,
+      });
+
       setGameStatus(GAME_STATUS.ROUND_END);
-      // socket.emit('update roundAnswers', {
-      //   roomCode: roomCode,
-      //   answerList: roundAnswers,
-      // });
+
       socket.emit('update status', {
         roomCode: roomCode,
         status: GAME_STATUS.ROUND_END,
@@ -229,6 +242,25 @@ const Game = () => {
     setGameStatus(GAME_STATUS.WAITING);
   };
 
+  const renderResultsComponent = () => {
+    setGameStatus(GAME_STATUS.RESULTS);
+    setRoundAnswers([]);
+    setRoundGuesses([]);
+    setRoundNumber((prevState) => prevState + 1);
+    socket.emit('update status', {
+      roomCode: roomCode,
+      status: GAME_STATUS.RESULTS,
+    });
+  };
+
+  const renderNextRound = () => {
+    setGameStatus(GAME_STATUS.ANSWERING);
+    socket.emit('update status', {
+      roomCode: roomCode,
+      status: GAME_STATUS.ANSWERING,
+    });
+  };
+
   const selectRenderComponment = () => {
     switch (gameStatus) {
       case GAME_STATUS.LOADING:
@@ -265,7 +297,17 @@ const Game = () => {
 
       case GAME_STATUS.ROUND_END:
         return roundAnswers[0].selectedBy ? (
-          <GameRoundEnd answers={roundAnswers} />
+          <GameRoundEnd
+            answers={roundAnswers}
+            advanceGame={renderResultsComponent}
+          />
+        ) : (
+          <h1>loading</h1>
+        );
+
+      case GAME_STATUS.RESULTS:
+        return roundAnswers ? (
+          <GameResults results={gameData} nextRound={renderNextRound} />
         ) : (
           <h1>loading</h1>
         );

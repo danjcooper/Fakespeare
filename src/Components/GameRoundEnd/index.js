@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GameRoundEnd = ({ answers }) => {
+const GameRoundEnd = ({ answers, advanceGame }) => {
   return (
     <section>
       {answers.map((answer, i) => {
@@ -14,6 +14,7 @@ const GameRoundEnd = ({ answers }) => {
           </article>
         );
       })}
+      <button onClick={advanceGame}>continue</button>
     </section>
   );
 };
