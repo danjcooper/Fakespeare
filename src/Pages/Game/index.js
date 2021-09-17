@@ -52,9 +52,7 @@ const Game = () => {
       playerList.forEach((player) => {
         const temp = {
           userName: player,
-          peopleFooled: 0,
-          correctAnswers: 0,
-          answers: [],
+          points: 0,
         };
 
         setGameData((prevState) => {
@@ -137,9 +135,18 @@ const Game = () => {
         answer: books[roundNumber][books[roundNumber].question],
       });
 
+      // Loop through each answer and see if anyone guessed it
       roundAnswers.forEach((answer) => {
         for (let i = 0; i < roundGuesses.length; i++) {
           if (answer.answer == roundGuesses[i].guess) {
+            if (playerList.includes(answer.userName)) {
+              for (let i = 0; i < gameData.length; i++) {
+                if (gameData[i].userName === answer.userName) {
+                  gameData[i].points++;
+                  break;
+                }
+              }
+            }
             answer.selectedBy
               ? answer.selectedBy.push(roundGuesses[i].userName)
               : (answer.selectedBy = [roundGuesses[i].userName]);
@@ -148,6 +155,17 @@ const Game = () => {
 
         if (!answer.selectedBy) {
           answer.selectedBy = 'nobody 😭';
+        }
+      });
+
+      roundGuesses.forEach((guess) => {
+        if (guess.guess === books[roundNumber][books[roundNumber].question]) {
+          for (let i = 0; i < gameData.length; i++) {
+            if (gameData[i].userName === guess.userName) {
+              gameData[i].points++;
+              break;
+            }
+          }
         }
       });
 
