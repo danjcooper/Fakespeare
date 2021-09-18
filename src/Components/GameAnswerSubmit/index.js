@@ -11,13 +11,13 @@ const GameAnswerSubmit = ({ bookInfo, handleSubmit }) => {
         <span className='blurb'>{bookInfo.blurb}</span>
       </p>
       {bookInfo.question === 'first_line' ? (
-        <h2>Make up the first Line</h2>
+        <h2>Make up the first line</h2>
       ) : (
-        <h2>Make up the last Line</h2>
+        <h2>Make up the last line</h2>
       )}
 
       <form onSubmit={handleSubmit}>
-        <textarea id='answer' type='text' placeholder='Answer here' />
+        <textarea id='answer' placeholder='Answer here' />
         <button type='submit'>Submit</button>
       </form>
     </section>

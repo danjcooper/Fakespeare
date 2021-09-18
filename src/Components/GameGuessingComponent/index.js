@@ -26,37 +26,43 @@ const GameGuessingComponent = ({
   }, []);
 
   const changeBackground = (e) => {
-    const answers = document.querySelectorAll('article.answer');
+    const answers = document.querySelectorAll('.answer-display');
     const answerArr = Array.from(answers);
-
+    console.log(answerArr);
+    console.log(e.target.closest('label'));
     answerArr.forEach((answer) => {
-      answer.style.background = 'none';
-      answer.style.fontWeight = '300';
       answer.style.color = 'black';
-      answer.style.background = 'rgb(219, 219, 219)';
+      answer.style.fontWeight = '300';
+      // answer.style.fontWeight = '300';
+      // answer.style.color = 'black';
+      // answer.style.background = 'rgb(219, 219, 219)';
     });
-    e.target.closest('article').style.background = '#eda92c';
-    e.target.closest('article').style.fontWeight = '800';
-    e.target.closest('article').style.color = 'white';
+    e.target.closest('label').style.color = 'green';
+    e.target.closest('label').style.fontWeight = '800';
+    // e.target.style.fontWeight = '800';
+    // e.target.style.color = 'white';
   };
 
   return (
     <>
       <h1>which answer is right?</h1>
       <form onSubmit={handleGuessSubmit}>
-        <section>
-          {answerList.map((item, i) => {
-            return (
-              <article onClick={changeBackground} className='answer'>
-                <label onClick={changeBackground} key={i}>
-                  {item.answer}
-                  <input name='answer' type='radio' value={item.answer} />
-                  <br />
-                </label>
-              </article>
-            );
-          })}
-        </section>
+        {answerList.map((item, i) => {
+          return (
+            <>
+              <label
+                className='answer-display'
+                onClick={changeBackground}
+                key={i}
+              >
+                {item.answer}
+                <input name='answer' type='radio' value={item.answer} />
+                <br />
+              </label>
+              <hr />
+            </>
+          );
+        })}
         <button type='submit'>Submit Guess</button>
       </form>
     </>

@@ -224,6 +224,7 @@ const Game = () => {
 
   const handleGuessSubmit = (e) => {
     e.preventDefault();
+    console.log(e.target.answer);
 
     if (owner) {
       setRoundGuesses((prevState) => {
