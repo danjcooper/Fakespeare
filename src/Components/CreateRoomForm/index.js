@@ -43,7 +43,9 @@ const CreateRoomForm = ({ toggleLogin }) => {
         />
         <button type='submit'>Start!</button>
       </form>
-      <button onClick={toggleLogin}>Join a Room</button>
+      <button className='switch' onClick={toggleLogin}>
+        Join a Room
+      </button>
       {submitted === true ? (
         <Redirect
           to={{

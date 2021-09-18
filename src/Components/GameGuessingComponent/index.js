@@ -47,7 +47,7 @@ const GameGuessingComponent = ({
         <section>
           {answerList.map((item, i) => {
             return (
-              <article className='answer'>
+              <article onClick={changeBackground} className='answer'>
                 <label onClick={changeBackground} key={i}>
                   {item.answer}
                   <input name='answer' type='radio' value={item.answer} />
