@@ -3,12 +3,12 @@ import React from 'react';
 const GameAnswerSubmit = ({ bookInfo, handleSubmit }) => {
   return (
     <section>
-      <p>
+      <p className='book-title'>
         {bookInfo.title}
         <br />
-        {bookInfo.author}
+        <span className='author'>{bookInfo.author}</span>
         <br />
-        <span>{bookInfo.blurb}</span>
+        <span className='blurb'>{bookInfo.blurb}</span>
       </p>
       {bookInfo.question === 'first_line' ? (
         <h2>Make up the first Line</h2>
@@ -17,7 +17,7 @@ const GameAnswerSubmit = ({ bookInfo, handleSubmit }) => {
       )}
 
       <form onSubmit={handleSubmit}>
-        <input id='answer' type='text' />
+        <textarea id='answer' type='text' placeholder='Answer here' />
         <button type='submit'>Submit</button>
       </form>
     </section>

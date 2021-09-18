@@ -63,13 +63,13 @@ const Game = () => {
   };
 
   return (
-    <>
-      <h1>Game-Page</h1>
+    <main>
       <section>
-        <h2>{roomCode}</h2>
+        <h2 className='heading'>ROOM CODE</h2>
+        <h2 id='room-code'>{roomCode}</h2>
       </section>
       <section>
-        <h3>Players</h3>
+        <h3 className='heading'>PLAYERS</h3>
         <PlayerList playerList={playerList} />
       </section>
       {owner ? <button onClick={handleStartGame}>Start Game</button> : null}
@@ -86,7 +86,7 @@ const Game = () => {
           }}
         />
       ) : null}
-    </>
+    </main>
   );
 };
 

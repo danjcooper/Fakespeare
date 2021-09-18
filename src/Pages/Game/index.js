@@ -328,7 +328,7 @@ const Game = () => {
     }
   };
 
-  return <>{selectRenderComponment()}</>;
+  return <main>{selectRenderComponment()}</main>;
 };
 
 export default Game;

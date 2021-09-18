@@ -1,0 +1,100 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+main {
+  padding: 15px;
+  text-align: center;
+}
+
+input,
+textarea {
+  display: block;
+  margin: 10px auto;
+  width: 100%;
+  resize: none;
+}
+
+textarea {
+  padding: 10px;
+  height: 120px;
+
+  font-size: 20px;
+
+  text-align: center;
+}
+
+input[type='text'] {
+  height: 40px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+
+  text-transform: uppercase;
+
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #1c3947;
+}
+
+button {
+  width: 70%;
+  height: 40px;
+  margin: 10px auto;
+  display: block;
+
+  font-size: 17px;
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+
+  border-radius: 50px;
+
+  outline: none;
+  border: none;
+
+  -webkit-appearance: none;
+
+  background: #eda92c;
+}
+button:hover {
+  cursor: pointer;
+}
+
+#room-code {
+  font-weight: 800;
+  font-size: 50px;
+  margin: 0;
+  border: 1px solid black;
+}
+.heading {
+  margin: 0;
+}
+
+.display-light {
+  font-weight: 300;
+}
+.book-title {
+  font-weight: 600;
+}
+.blurb {
+  font-weight: 300;
+}
+.author {
+  font-size: 12px;
+}
+
+input[type='radio'] {
+  display: none;
+}
+
+.answer {
+  margin: 10px;
+  border-radius: 10px;
+  padding: 10px;
+
+  background-color: rgb(219, 219, 219);
+}

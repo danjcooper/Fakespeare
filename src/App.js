@@ -3,6 +3,8 @@ import { CreateRoomForm, JoinRoomForm, Nav } from './Components';
 import { Lobby, Game } from './Pages';
 import { Switch, Route } from 'react-router-dom';
 
+import './style.css';
+
 function App() {
   const [loginType, setLoginType] = useState('join');
   const [username, setUsername] = useState('');

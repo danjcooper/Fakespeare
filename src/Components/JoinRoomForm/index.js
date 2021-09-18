@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 const JoinRoomForm = ({ toggleLogin }) => {
   const [formData, setFormData] = useState({ username: '', roomCode: '' });
@@ -17,7 +17,7 @@ const JoinRoomForm = ({ toggleLogin }) => {
   };
 
   return (
-    <>
+    <main>
       <form onSubmit={handleSubmit}>
         <input
           onChange={handleFormUpdate}
@@ -36,7 +36,6 @@ const JoinRoomForm = ({ toggleLogin }) => {
           required
         />
         <button type='submit'>Join!</button>
-        <Link to='/create'>Create a room</Link>
       </form>
       <button onClick={toggleLogin}>Create a Room</button>
 
@@ -52,7 +51,7 @@ const JoinRoomForm = ({ toggleLogin }) => {
           }}
         />
       ) : null}
-    </>
+    </main>
   );
 };
 

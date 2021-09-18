@@ -32,7 +32,7 @@ const CreateRoomForm = ({ toggleLogin }) => {
     return roomCode;
   };
   return (
-    <>
+    <main>
       <form onSubmit={handleSubmit}>
         <input
           onChange={handleNameChange}
@@ -52,7 +52,7 @@ const CreateRoomForm = ({ toggleLogin }) => {
           }}
         />
       ) : null}
-    </>
+    </main>
   );
 };
 
