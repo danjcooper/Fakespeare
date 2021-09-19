@@ -7,8 +7,9 @@ const GameRoundEnd = ({ answers, advanceGame }) => {
         return (
           <article key={i}>
             <h2>{answer.answer}</h2>
-            <p>written by</p>
-            <h3>{answer.userName}</h3>
+            <p>
+              written by <strong>{answer.userName}</strong>
+            </p>
             <p>They fooled</p>
             <h3>{answer.selectedBy}</h3>
           </article>

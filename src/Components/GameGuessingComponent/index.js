@@ -4,6 +4,7 @@ const GameGuessingComponent = ({
   answers,
   handleGuessSubmit,
   correctAnswer,
+  userName,
 }) => {
   const [answerList, setAnswerList] = useState(answers);
 
@@ -48,20 +49,22 @@ const GameGuessingComponent = ({
       <h1>which answer is right?</h1>
       <form onSubmit={handleGuessSubmit}>
         {answerList.map((item, i) => {
-          return (
-            <>
-              <label
-                className='answer-display'
-                onClick={changeBackground}
-                key={i}
-              >
-                {item.answer}
-                <input name='answer' type='radio' value={item.answer} />
-                <br />
-              </label>
-              <hr />
-            </>
-          );
+          if (item.userName !== userName) {
+            return (
+              <>
+                <label
+                  className='answer-display'
+                  onClick={changeBackground}
+                  key={i}
+                >
+                  {item.answer}
+                  <input name='answer' type='radio' value={item.answer} />
+                  <br />
+                </label>
+                <hr />
+              </>
+            );
+          }
         })}
         <button type='submit'>Submit Guess</button>
       </form>

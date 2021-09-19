@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const GameAnswerSubmit = ({ bookInfo, handleSubmit }) => {
+  const [guess, setGuess] = useState('');
+
+  const handleGuessInput = (e) => {
+    setGuess(e.target.value);
+  };
+
+  useEffect(() => {
+    const button = document.getElementById('submit-button');
+    if (guess === '') {
+      button.disabled = true;
+    } else {
+      button.disabled = false;
+    }
+  }, [guess]);
+
   return (
     <section>
       <p className='book-title'>
@@ -17,8 +32,15 @@ const GameAnswerSubmit = ({ bookInfo, handleSubmit }) => {
       )}
 
       <form onSubmit={handleSubmit}>
-        <textarea id='answer' placeholder='Answer here' />
-        <button type='submit'>Submit</button>
+        <textarea
+          onChange={handleGuessInput}
+          id='answer'
+          placeholder='Answer here'
+          value={guess}
+        />
+        <button id='submit-button' type='submit'>
+          Submit
+        </button>
       </form>
     </section>
   );

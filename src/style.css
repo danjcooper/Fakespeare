@@ -75,6 +75,11 @@ button {
 button:hover {
   cursor: pointer;
 }
+button:disabled {
+  background-color: rgb(199, 199, 199);
+  color: grey;
+  opacity: 0.8;
+}
 
 #room-code {
   font-weight: 800;

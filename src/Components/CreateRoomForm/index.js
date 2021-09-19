@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 const helpers = require('../../helpers');
 
@@ -8,7 +8,7 @@ const CreateRoomForm = ({ toggleLogin }) => {
   const [submitted, setSubmitted] = useState(false);
 
   const handleNameChange = (e) => {
-    setName(e.target.value);
+    setName(e.target.value.toUpperCase());
   };
 
   const handleSubmit = (e) => {
@@ -16,6 +16,15 @@ const CreateRoomForm = ({ toggleLogin }) => {
     setRoomCode(generateRoomCode());
     setSubmitted(true);
   };
+
+  useEffect(() => {
+    const button = document.getElementById('submit-button');
+    if (name === '') {
+      button.disabled = true;
+    } else {
+      button.disabled = false;
+    }
+  }, [name]);
 
   const generateRoomCode = () => {
     const bank = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -41,7 +50,9 @@ const CreateRoomForm = ({ toggleLogin }) => {
           value={name}
           required
         />
-        <button type='submit'>Start!</button>
+        <button id='submit-button' type='submit'>
+          Start!
+        </button>
       </form>
       <button className='switch' onClick={toggleLogin}>
         Join a Room

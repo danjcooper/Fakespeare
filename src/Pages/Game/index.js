@@ -291,6 +291,7 @@ const Game = () => {
             handleGuessSubmit={handleGuessSubmit}
             answers={roundAnswers}
             correctAnswer={books[roundNumber]}
+            userName={userName}
           />
         ) : (
           <h1>loading</h1>
