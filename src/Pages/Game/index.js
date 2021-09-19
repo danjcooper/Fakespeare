@@ -31,9 +31,19 @@ const Game = () => {
   const [roundNumber, setRoundNumber] = useState(0);
   const [roundAnswers, setRoundAnswers] = useState([]);
   const [roundGuesses, setRoundGuesses] = useState([]);
+  const [booksSent, setBooksSent] = useState(false);
 
-  const [gameStatus, setGameStatus] = useState(GAME_STATUS.LOADING);
-  const [books, setBooks] = useState([]);
+  const [gameStatus, setGameStatus] = useState('');
+  const [books, setBooks] = useState([
+    {
+      title: 'loading',
+      author: 'loading',
+      blurb: 'loading',
+      first_line: 'loading',
+      last_line: 'loading',
+      year: 'loading',
+    },
+  ]);
   const [gameData, setGameData] = useState([]);
 
   useEffect(() => {
@@ -200,7 +210,12 @@ const Game = () => {
   }, [roundGuesses]);
 
   useEffect(() => {
-    socket.emit('book list', { roomCode: roomCode, bookList: books });
+    if (!booksSent) {
+      socket.emit('book list', { roomCode: roomCode, bookList: books });
+    }
+    return () => {
+      setBooksSent(true);
+    };
   }, [books]);
 
   const handleAnswer = (e) => {
@@ -233,6 +248,7 @@ const Game = () => {
     e.preventDefault();
 
     if (!e.target.answer.value) {
+      // If theres no answer selected return
       return;
     }
 
@@ -286,13 +302,11 @@ const Game = () => {
         return <h1>Loading</h1>;
 
       case GAME_STATUS.ANSWERING:
-        return books.length > 0 ? (
+        return (
           <GameAnswerSubmit
             bookInfo={books[roundNumber]}
             handleSubmit={handleAnswer}
           />
-        ) : (
-          <h1>loading</h1>
         );
 
       case GAME_STATUS.GUESSING:
