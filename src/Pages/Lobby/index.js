@@ -35,7 +35,6 @@ const Game = () => {
 
     socket.on('start game', () => {
       setStartGame(true);
-      console.log('hey 1');
     });
   }, []);
 
@@ -57,7 +56,6 @@ const Game = () => {
   }, [startGame]);
 
   const handleStartGame = () => {
-    console.log('hey2');
     setStartGame(true);
     // Emit start game to the socket
   };

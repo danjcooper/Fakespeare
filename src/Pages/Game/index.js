@@ -204,11 +204,18 @@ const Game = () => {
   }, [books]);
 
   const handleAnswer = (e) => {
+    let answer = e.target.answer.value;
+    let lastChar = answer.charAt(answer.length - 1);
+    const endings = ['.', '?', '!'];
+    if (!endings.includes(lastChar)) {
+      answer = answer.concat('.');
+    }
+
     e.preventDefault();
     if (owner) {
       setRoundAnswers((prevState) => {
         let temp = prevState.slice(0);
-        temp.push({ userName: userName, answer: e.target.answer.value });
+        temp.push({ userName: userName, answer: answer });
         setGameStatus(GAME_STATUS.WAITING);
         return temp;
       });
@@ -216,7 +223,7 @@ const Game = () => {
       socket.emit('answer', {
         roomCode: roomCode,
         userName: userName,
-        answer: e.target.answer.value,
+        answer: answer,
       });
       setGameStatus(GAME_STATUS.WAITING);
     }
@@ -224,7 +231,6 @@ const Game = () => {
 
   const handleGuessSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.answer);
 
     if (owner) {
       setRoundGuesses((prevState) => {

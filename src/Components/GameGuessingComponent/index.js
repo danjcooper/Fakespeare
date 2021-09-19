@@ -29,8 +29,6 @@ const GameGuessingComponent = ({
   const changeBackground = (e) => {
     const answers = document.querySelectorAll('.answer-display');
     const answerArr = Array.from(answers);
-    console.log(answerArr);
-    console.log(e.target.closest('label'));
     answerArr.forEach((answer) => {
       answer.style.color = 'black';
       answer.style.fontWeight = '300';
