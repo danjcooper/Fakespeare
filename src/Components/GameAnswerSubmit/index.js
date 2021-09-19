@@ -4,7 +4,13 @@ const GameAnswerSubmit = ({ bookInfo, handleSubmit }) => {
   const [guess, setGuess] = useState('');
 
   const handleGuessInput = (e) => {
-    setGuess(e.target.value);
+    let firstLetter = e.target.value.slice(0, 1);
+    firstLetter = firstLetter.toUpperCase();
+    let remainingString = e.target.value.slice(1);
+
+    let result = firstLetter.concat(remainingString);
+
+    setGuess(result);
   };
 
   useEffect(() => {
