@@ -127,6 +127,11 @@ const Game = () => {
         setRoundNumber((prevState) => prevState + 1);
       }
     });
+
+    socket.on('reconnect', () => {
+      const data = { username: userName, roomName: roomCode };
+      socket.emit('joinRoom', data);
+    });
   }, []);
 
   useEffect(() => {
