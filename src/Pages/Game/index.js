@@ -4,6 +4,7 @@ import {
   GameGuessingComponent,
   GameResults,
   GameRoundEnd,
+  Loader,
 } from '../../Components';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -310,7 +311,7 @@ const Game = () => {
             handleSubmit={handleAnswer}
           />
         ) : (
-          <h1>loading</h1>
+          <Loader />
         );
 
       case GAME_STATUS.GUESSING:
@@ -322,7 +323,7 @@ const Game = () => {
             userName={userName}
           />
         ) : (
-          <h1>loading</h1>
+          <Loader />
         );
 
       case GAME_STATUS.WAITING:
@@ -340,21 +341,21 @@ const Game = () => {
             advanceGame={renderResultsComponent}
           />
         ) : (
-          <h1>loading</h1>
+          <Loader />
         );
 
       case GAME_STATUS.RESULTS:
         return roundAnswers ? (
           <GameResults results={gameData} nextRound={renderNextRound} />
         ) : (
-          <h1>loading</h1>
+          <Loader />
         );
 
       case GAME_STATUS.GAME_END:
         return <h1>Game End</h1>;
 
       default:
-        return <h1>Default</h1>;
+        return <Loader />;
     }
   };
 

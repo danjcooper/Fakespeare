@@ -6,3 +6,4 @@ export { default as GameAnswerSubmit } from './GameAnswerSubmit';
 export { default as GameGuessingComponent } from './GameGuessingComponent';
 export { default as GameRoundEnd } from './GameRoundEnd';
 export { default as GameResults } from './GameResults';
+export { default as Loader } from './Loader';
