@@ -129,8 +129,14 @@ const Game = () => {
     });
 
     socket.on('reconnect', () => {
-      const data = { username: userName, roomName: roomCode };
-      socket.emit('joinRoom', data);
+      console.log('Reconnecting');
+    });
+
+    socket.on('connect', function () {
+      // thats the key line, now register to the room you want.
+      // info about the required rooms (if its not as simple as my
+      // example) could easily be reached via a DB connection. It worth it.
+      socket.emit('joinRoom', { userName: userName, roomName: roomCode });
     });
   }, []);
 
