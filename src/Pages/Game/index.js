@@ -302,11 +302,13 @@ const Game = () => {
         return <h1>Loading</h1>;
 
       case GAME_STATUS.ANSWERING:
-        return (
+        return books.length > 0 ? (
           <GameAnswerSubmit
             bookInfo={books[roundNumber]}
             handleSubmit={handleAnswer}
           />
+        ) : (
+          <h1>loading</h1>
         );
 
       case GAME_STATUS.GUESSING:
