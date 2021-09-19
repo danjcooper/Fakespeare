@@ -32,6 +32,7 @@ const Game = () => {
   const [roundAnswers, setRoundAnswers] = useState([]);
   const [roundGuesses, setRoundGuesses] = useState([]);
   const [booksSent, setBooksSent] = useState(false);
+  const [answersFinished, setAnswersFinished] = useState(false);
 
   const [gameStatus, setGameStatus] = useState('');
   const [books, setBooks] = useState([
@@ -121,29 +122,29 @@ const Game = () => {
       if (status === GAME_STATUS.RESULTS) {
         setRoundAnswers([]);
         setRoundGuesses([]);
+        setAnswersFinished(false);
         setRoundNumber((prevState) => prevState + 1);
       }
     });
   }, []);
 
   useEffect(() => {
-    if (
-      roundAnswers.length === playerList.length &&
-      !roundAnswers[0].selectedBy
-    ) {
+    console.log(gameStatus);
+  }, [gameStatus]);
+
+  useEffect(() => {
+    if (roundAnswers.length === playerList.length && !answersFinished) {
       // setRoundNumber((prevState) => prevState + 1);
-
       setGameStatus(GAME_STATUS.GUESSING);
-
       socket.emit('update roundAnswers', {
         roomCode: roomCode,
         answerList: roundAnswers,
       });
-
       socket.emit('update status', {
         roomCode: roomCode,
         status: GAME_STATUS.GUESSING,
       });
+      setAnswersFinished(true);
     }
   }, [roundAnswers]);
 
@@ -272,6 +273,7 @@ const Game = () => {
   const renderResultsComponent = () => {
     setGameStatus(GAME_STATUS.RESULTS);
     setRoundAnswers([]);
+    setAnswersFinished(false);
     setRoundGuesses([]);
     setRoundNumber((prevState) => prevState + 1);
     socket.emit('update status', {
