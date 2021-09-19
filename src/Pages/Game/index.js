@@ -328,10 +328,13 @@ const Game = () => {
 
       case GAME_STATUS.WAITING:
         return (
-          <h1>
-            waiting for others to submit their answers <br />
-            Library notes on the book go here
-          </h1>
+          <>
+            <h1>
+              waiting for others to submit their answers <br />
+              Library notes on the book go here
+            </h1>
+            <Loader />
+          </>
         );
 
       case GAME_STATUS.ROUND_END:
