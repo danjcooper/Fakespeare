@@ -232,6 +232,10 @@ const Game = () => {
   const handleGuessSubmit = (e) => {
     e.preventDefault();
 
+    if (!e.target.answer.value) {
+      return;
+    }
+
     if (owner) {
       setRoundGuesses((prevState) => {
         const newArr = prevState.slice(0);

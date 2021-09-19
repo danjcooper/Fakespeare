@@ -1,6 +1,10 @@
 import React from 'react';
 
 const GameRoundEnd = ({ answers, advanceGame }) => {
+  // const handleSelectedBy = () => {
+
+  // }
+
   return (
     <section>
       {answers.map((answer, i) => {
