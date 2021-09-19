@@ -6,9 +6,4 @@ const socketUrl =
     ? 'http://localhost:3000/'
     : 'https://fakespeare-socket.herokuapp.com/';
 
-export const socket = io(socketUrl, {
-  reconnection: true,
-  reconnectionDelay: 1000,
-  reconnectionDelayMax: 5000,
-  reconnectionAttempts: 99999,
-});
+export const socket = io(socketUrl, { forceNew: true });
