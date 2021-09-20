@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 
 const GameResults = ({ results, nextRound }) => {
   const sortResultsByScore = () => {
@@ -29,7 +30,21 @@ const GameResults = ({ results, nextRound }) => {
           );
         })}
       </table>
-      <button onClick={nextRound}>Next Round</button>
+      <section id='timer-container'>
+        <CountdownCircleTimer
+          isPlaying
+          duration={12}
+          onComplete={nextRound}
+          colors={[
+            ['#004777', 0.33],
+            ['#F7B801', 0.33],
+            ['#A30000', 0.33],
+          ]}
+        >
+          {({ elapsedTime }) => 'Next Round \n Starting'}
+        </CountdownCircleTimer>
+        {/* <button onClick={nextRound}>Next Round</button> */}
+      </section>
     </>
   );
 };
