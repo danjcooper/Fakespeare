@@ -30,14 +30,19 @@ const GameGuessingComponent = ({
     const answers = document.querySelectorAll('.answer-display');
     const answerArr = Array.from(answers);
     answerArr.forEach((answer) => {
-      answer.style.color = 'black';
-      answer.style.fontWeight = '300';
+      answer.style.color = 'white';
+      answer.style.background = '#71999b';
+      answer.style.border = '2px solid #568083';
+      answer.style.width = '80%';
+
       // answer.style.fontWeight = '300';
       // answer.style.color = 'black';
       // answer.style.background = 'rgb(219, 219, 219)';
     });
-    e.target.closest('label').style.color = 'green';
-    e.target.closest('label').style.fontWeight = '800';
+    e.target.closest('label').style.color = 'white';
+    e.target.closest('label').style.background = '#eda92c';
+    e.target.closest('label').style.border = '2px solid #e4960e';
+    e.target.closest('label').style.width = '85%';
     // e.target.style.fontWeight = '800';
     // e.target.style.color = 'white';
   };
