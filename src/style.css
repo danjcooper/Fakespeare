@@ -192,7 +192,9 @@ table {
   border: 2px solid #568083;
   background-color: #71999b;
 }
-
+.book-info-answering {
+  background-color: white;
+}
 @media only screen and (min-width: 500px) {
   #bg-img {
     width: 250px;

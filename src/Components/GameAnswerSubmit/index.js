@@ -24,7 +24,7 @@ const GameAnswerSubmit = ({ bookInfo, handleSubmit }) => {
 
   return (
     <section>
-      <p className='book-title'>
+      <p className='book-title book-info-answering'>
         {bookInfo.title}
         <br />
         <span className='author'>{bookInfo.author}</span>
@@ -32,9 +32,9 @@ const GameAnswerSubmit = ({ bookInfo, handleSubmit }) => {
         <span className='blurb'>{bookInfo.blurb}</span>
       </p>
       {bookInfo.question === 'first_line' ? (
-        <h2>Make up the first line</h2>
+        <h2 className='book-info-answering'>Make up the first line</h2>
       ) : (
-        <h2>Make up the last line</h2>
+        <h2 className='book-info-answering'>Make up the last line</h2>
       )}
 
       <form onSubmit={handleSubmit}>
