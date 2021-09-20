@@ -34,11 +34,11 @@ const GameResults = ({ results, nextRound }) => {
         <CountdownCircleTimer
           isPlaying
           duration={12}
+          size={140}
           onComplete={nextRound}
           colors={[
-            ['#004777', 0.33],
-            ['#F7B801', 0.33],
-            ['#A30000', 0.33],
+            ['#3246a8', 0.5],
+            ['#32a879', 0.5],
           ]}
         >
           {({ elapsedTime }) => 'Next Round \n Starting'}
