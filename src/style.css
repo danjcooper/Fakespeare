@@ -9,7 +9,10 @@ nav {
   width: 100%;
   background-color: rgb(241, 241, 241);
   text-align: center;
-  padding: 5px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   font-weight: 800;
 }
@@ -21,6 +24,11 @@ nav a {
 main {
   padding: 15px;
   text-align: center;
+  height: calc(100vh - 40px);
+
+  display: flex;
+
+  flex-direction: column;
 }
 
 input,
@@ -121,4 +129,40 @@ table {
 .switch {
   background: none;
   color: #1c3947;
+}
+.results-answer-container {
+  border: 2px solid #568083;
+  margin: 10px;
+
+  border-radius: 15px;
+  background-color: #71999b;
+  color: white;
+}
+.results-answer {
+  margin: 5px;
+
+  font-size: 20px;
+}
+.results-author {
+  margin: 5px;
+  font-size: 12px;
+}
+.results-fooled {
+  margin: 10px;
+  font-weight: bold;
+
+  font-size: 17px;
+}
+.picked-by {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.picked-by-name {
+  margin: 10px;
+  font-size: 14px;
+  background: white;
+  padding: 2px 20px;
+  border-radius: 50px;
+  color: black;
 }

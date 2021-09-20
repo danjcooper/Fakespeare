@@ -1,24 +1,29 @@
 import React from 'react';
 
 const GameRoundEnd = ({ answers, advanceGame }) => {
-  // const handleSelectedBy = () => {
-
-  // }
+  const handleSelectedBy = (selectedBy) => {
+    console.log(selectedBy);
+  };
 
   return (
     <section>
       {answers.map((answer, i) => {
         return (
-          <article key={i}>
-            <h2>{answer.answer}</h2>
-            <p>
-              written by <strong>{answer.userName}</strong>
-            </p>
-            <p>They fooled</p>
-            <h3>{answer.selectedBy}</h3>
+          <article class='results-answer-container' key={i}>
+            <h2 className='results-answer'>{answer.answer}</h2>
+            <p className='results-author'>written by {answer.userName}</p>
+            <p className='results-fooled'>Picked By</p>
+            <section className='picked-by'>
+              {answer.selectedBy.map((user, i) => (
+                <article className='picked-by-name' key={i}>
+                  {user}
+                </article>
+              ))}
+            </section>
           </article>
         );
       })}
+
       <button onClick={advanceGame}>continue</button>
     </section>
   );
