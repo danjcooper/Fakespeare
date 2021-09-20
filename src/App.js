@@ -3,6 +3,7 @@ import { CreateRoomForm, JoinRoomForm, Nav } from './Components';
 import { Lobby, Game } from './Pages';
 import { Switch, Route } from 'react-router-dom';
 
+import logo from './logo.svg';
 import './style.css';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           <h1>404, not found</h1>
         </Route>
       </Switch>
+      <img id='bg-img' src={logo} />
     </div>
   );
 }

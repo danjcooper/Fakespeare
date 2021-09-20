@@ -1,6 +1,15 @@
 * {
   box-sizing: border-box;
 }
+
+#bg-img {
+  width: 70%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  z-index: -100;
+}
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
@@ -79,6 +88,7 @@ button {
   -webkit-appearance: none;
 
   background: #eda92c;
+  border: 2px solid #e4960e;
 }
 button:hover {
   cursor: pointer;
@@ -86,6 +96,7 @@ button:hover {
 button:disabled {
   background-color: rgb(199, 199, 199);
   color: grey;
+  border: 2px solid rgb(160, 160, 160);
   opacity: 0.8;
 }
 
@@ -129,6 +140,7 @@ table {
 .switch {
   background: none;
   color: #1c3947;
+  border: none;
 }
 .results-answer-container {
   border: 2px solid #568083;
