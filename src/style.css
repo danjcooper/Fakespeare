@@ -178,3 +178,14 @@ table {
   border-radius: 50px;
   color: black;
 }
+
+@media only screen and (min-width: 500px) {
+  #bg-img {
+    width: 250px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    z-index: -100;
+  }
+}
