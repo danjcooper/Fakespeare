@@ -234,7 +234,7 @@ const Game = () => {
   const handleAnswer = (e) => {
     let answer = e.target.answer.value;
     let lastChar = answer.charAt(answer.length - 1);
-    const endings = ['.', '?', '!'];
+    const endings = ['.', '?', '!', ' '];
     if (!endings.includes(lastChar)) {
       answer = answer.concat('.');
     }

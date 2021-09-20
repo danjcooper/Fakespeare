@@ -43,7 +43,6 @@ const GameResults = ({ results, nextRound }) => {
         >
           {({ elapsedTime }) => 'Next Round \n Starting'}
         </CountdownCircleTimer>
-        {/* <button onClick={nextRound}>Next Round</button> */}
       </section>
     </>
   );
