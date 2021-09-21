@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 const CountdownBar = () => {
-  const [progressValue, setProgressValue] = useState(10);
   const [max, setMax] = useState(10);
+
   const [myStyle, setMyStyle] = useState({
     transition: `all ${max}s cubic-bezier(0.39, 0.4, 0.52, 0.6) 0s`,
-    width: '100%',
-    background: 'pink',
+    width: '0',
+    background: '#eda92c',
     height: '100%',
   });
 
@@ -15,9 +15,13 @@ const CountdownBar = () => {
       return {
         ...prevState,
         transition: `all ${max}s cubic-bezier(0.39, 0.4, 0.52, 0.6) 0s`,
-        width: '0',
+        width: '100%',
       };
     });
+
+    let runWhenDone = setTimeout(() => {
+      alert('hi');
+    }, max * 1000);
   }, []);
 
   return (
