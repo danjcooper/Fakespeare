@@ -7,3 +7,5 @@ export { default as GameGuessingComponent } from './GameGuessingComponent';
 export { default as GameRoundEnd } from './GameRoundEnd';
 export { default as GameResults } from './GameResults';
 export { default as Loader } from './Loader';
+export { default as BookRoulette } from './BookRoulette';
+export { default as CountdownBar } from './CountdownBar';

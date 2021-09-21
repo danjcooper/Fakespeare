@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+import { CountdownBar } from '../';
 
 const GameResults = ({ results, nextRound }) => {
   const sortResultsByScore = () => {

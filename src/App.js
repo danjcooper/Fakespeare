@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { CreateRoomForm, JoinRoomForm, Nav } from './Components';
+import {
+  CreateRoomForm,
+  JoinRoomForm,
+  Nav,
+  BookRoulette,
+  CountdownBar,
+} from './Components';
 import { Lobby, Game } from './Pages';
 import { Switch, Route } from 'react-router-dom';
 
@@ -32,11 +38,15 @@ function App() {
         <Route exact path='/game'>
           <Game />
         </Route>
+        <Route exact path='/testing'>
+          <BookRoulette />
+          <CountdownBar />
+        </Route>
         <Route>
           <h1>404, not found</h1>
         </Route>
       </Switch>
-      <img id='bg-img' src={logo} />
+      <img id='bg-img' src={logo} alt='illustration of woman reading book' />
     </div>
   );
 }
