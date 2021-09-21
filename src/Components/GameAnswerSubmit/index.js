@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { CountdownBar } from '..';
 
 const GameAnswerSubmit = ({ bookInfo, handleSubmit }) => {
   const [guess, setGuess] = useState('');

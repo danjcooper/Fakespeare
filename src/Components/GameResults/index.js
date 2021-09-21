@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-import { CountdownBar } from '../';
+
+import { CountdownBar } from '..';
 
 const GameResults = ({ results, nextRound }) => {
   const sortResultsByScore = () => {
@@ -16,6 +16,8 @@ const GameResults = ({ results, nextRound }) => {
 
   return (
     <>
+      <CountdownBar runWhenDone={nextRound} duration={5} />
+
       <h1>RESULTS</h1>
       <table>
         <tr>
@@ -31,20 +33,6 @@ const GameResults = ({ results, nextRound }) => {
           );
         })}
       </table>
-      <section id='timer-container'>
-        <CountdownCircleTimer
-          isPlaying
-          duration={12}
-          size={140}
-          onComplete={nextRound}
-          colors={[
-            ['#3246a8', 0.5],
-            ['#32a879', 0.5],
-          ]}
-        >
-          {({ elapsedTime }) => 'Next Round \n Starting'}
-        </CountdownCircleTimer>
-      </section>
     </>
   );
 };

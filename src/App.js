@@ -39,8 +39,10 @@ function App() {
           <Game />
         </Route>
         <Route exact path='/testing'>
-          <BookRoulette />
-          <CountdownBar />
+          <main>
+            <BookRoulette />
+            <CountdownBar runWhenDone={() => alert('prop')} duration={5} />
+          </main>
         </Route>
         <Route>
           <h1>404, not found</h1>
