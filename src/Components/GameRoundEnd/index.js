@@ -21,7 +21,7 @@ const GameRoundEnd = ({ answers, advanceGame }) => {
         );
       })}
       <CountdownBar runWhenDone={advanceGame} duration={10} />
-      <button onClick={advanceGame}>continue</button>
+      {/* <button onClick={advanceGame}>continue</button> */}
     </section>
   );
 };
