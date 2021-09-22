@@ -11,6 +11,7 @@ const Waiting = ({ bookFacts }) => {
       ];
     }
     const temp = bookFacts.split(/.:/g);
+    temp.shift();
     return temp;
   };
 

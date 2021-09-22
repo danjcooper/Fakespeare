@@ -41,7 +41,7 @@ function App() {
           <Game />
         </Route>
         <Route exact path='/testing'>
-          <Waiting bookFacts={'fact one goes here fact two goes here'} />
+          <Waiting bookFacts={'1:fact one goes here 2:fact two goes here'} />
         </Route>
         <Route>
           <h1>404, not found</h1>
