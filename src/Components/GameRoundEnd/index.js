@@ -6,16 +6,22 @@ const GameRoundEnd = ({ answers, advanceGame }) => {
     <section>
       {answers.map((answer, i) => {
         return (
-          <article className='results-answer-container' key={i}>
-            <h2 className='results-answer'>{answer.answer}</h2>
-            <p className='results-author'>written by {answer.userName}</p>
-            <p className='results-fooled'>Picked By</p>
-            <section className='picked-by'>
-              {answer.selectedBy.map((user, i) => (
-                <article className='picked-by-name' key={i}>
-                  {user}
-                </article>
-              ))}
+          <article key={i}>
+            <section className='written-by-container'>
+              <p className='results-author'>
+                Author: <span className='bolder'>{answer.userName}</span>
+              </p>
+            </section>
+            <section className='results-answer-container'>
+              <h2 className='results-answer'>{answer.answer}</h2>
+
+              <section className='picked-by'>
+                {answer.selectedBy.map((user, i) => (
+                  <article className='picked-by-name' key={i}>
+                    {user}
+                  </article>
+                ))}
+              </section>
             </section>
           </article>
         );

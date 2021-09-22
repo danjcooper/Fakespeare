@@ -5,6 +5,7 @@ import {
   Nav,
   BookRoulette,
   CountdownBar,
+  GameRoundEnd,
 } from './Components';
 import { Lobby, Game } from './Pages';
 import { Switch, Route } from 'react-router-dom';
@@ -40,8 +41,16 @@ function App() {
         </Route>
         <Route exact path='/testing'>
           <main>
-            <BookRoulette />
-            <CountdownBar runWhenDone={() => alert('prop')} duration={5} />
+            <GameRoundEnd
+              answers={[
+                {
+                  answer: 'The plath to choose is the path less trodden.',
+                  userName: 'DAN',
+                  selectedBy: ['DAN'],
+                },
+              ]}
+              advanceGame={() => console.log('hi')}
+            />
           </main>
         </Route>
         <Route>
