@@ -30,6 +30,7 @@ const Game = () => {
   const [owner, setOwner] = useState(location.state.owner);
   const [userName, setUserName] = useState(location.state.userName);
   const [playerList, setPlayerList] = useState(location.state.playerList);
+  const [noOfBooks, setNoOfBooks] = useState(location.state.noOfBooks);
   const [roundNumber, setRoundNumber] = useState(0);
   const [roundAnswers, setRoundAnswers] = useState([]);
   const [roundGuesses, setRoundGuesses] = useState([]);
@@ -53,7 +54,7 @@ const Game = () => {
     if (owner) {
       const loadBooks = async () => {
         const booksFromApi = await axios.get(
-          'https://fakespeare-api.herokuapp.com/play/5'
+          `https://fakespeare-api.herokuapp.com/play/${noOfBooks}`
         );
 
         booksFromApi.data.forEach((book) => {

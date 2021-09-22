@@ -9,6 +9,7 @@ const Game = () => {
   const [userName, setUserName] = useState(location.state.username);
   const [roomCode, setRoomCode] = useState(location.state.roomCode);
   const [owner, setOwner] = useState(location.state.roomOwner);
+  const [noOfBooks, setNoOfBooks] = useState(location.state.noOfBooks);
   const [startGame, setStartGame] = useState(false);
   const [playerList, setPlayerList] = useState([userName]);
 
@@ -80,6 +81,7 @@ const Game = () => {
               owner: owner,
               playerList: playerList,
               userName: userName,
+              noOfBooks: noOfBooks,
             },
           }}
         />

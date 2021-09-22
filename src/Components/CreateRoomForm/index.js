@@ -6,9 +6,14 @@ const CreateRoomForm = ({ toggleLogin }) => {
   const [name, setName] = useState('');
   const [roomCode, setRoomCode] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [noOfBooks, setNnoOfBooks] = useState(5);
 
   const handleNameChange = (e) => {
     setName(e.target.value.toUpperCase());
+  };
+
+  const handleNumberChange = (e) => {
+    setNnoOfBooks(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -50,6 +55,13 @@ const CreateRoomForm = ({ toggleLogin }) => {
           value={name}
           required
         />
+        <input
+          type='number'
+          max='10'
+          min='1'
+          onChange={handleNumberChange}
+          value={noOfBooks}
+        />
         <button id='submit-button' type='submit'>
           Start!
         </button>
@@ -61,7 +73,12 @@ const CreateRoomForm = ({ toggleLogin }) => {
         <Redirect
           to={{
             pathname: '/lobby',
-            state: { username: name, roomCode: roomCode, roomOwner: true },
+            state: {
+              username: name,
+              roomCode: roomCode,
+              roomOwner: true,
+              noOfBooks: noOfBooks,
+            },
           }}
         />
       ) : null}
