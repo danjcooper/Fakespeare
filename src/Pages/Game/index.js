@@ -5,6 +5,7 @@ import {
   GameResults,
   GameRoundEnd,
   Loader,
+  Waiting,
 } from '../../Components';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -340,10 +341,7 @@ const Game = () => {
       case GAME_STATUS.WAITING:
         return (
           <>
-            <h1>
-              waiting for others to submit their answers <br />
-              Library notes on the book go here
-            </h1>
+            <Waiting bookFacts={books[roundNumber]} />
             <Loader />
           </>
         );

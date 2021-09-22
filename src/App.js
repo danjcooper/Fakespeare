@@ -6,6 +6,7 @@ import {
   BookRoulette,
   CountdownBar,
   GameRoundEnd,
+  Waiting,
 } from './Components';
 import { Lobby, Game } from './Pages';
 import { Switch, Route } from 'react-router-dom';
@@ -40,18 +41,7 @@ function App() {
           <Game />
         </Route>
         <Route exact path='/testing'>
-          <main>
-            <GameRoundEnd
-              answers={[
-                {
-                  answer: 'The plath to choose is the path less trodden.',
-                  userName: 'DAN',
-                  selectedBy: ['DAN'],
-                },
-              ]}
-              advanceGame={() => console.log('hi')}
-            />
-          </main>
+          <Waiting bookFacts={'fact one goes here fact two goes here'} />
         </Route>
         <Route>
           <h1>404, not found</h1>
