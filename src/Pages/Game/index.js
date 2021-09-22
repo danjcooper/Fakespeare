@@ -341,7 +341,7 @@ const Game = () => {
       case GAME_STATUS.WAITING:
         return (
           <>
-            <Waiting bookFacts={books[roundNumber]} />
+            <Waiting bookFacts={books[roundNumber].notes} />
             <Loader />
           </>
         );
