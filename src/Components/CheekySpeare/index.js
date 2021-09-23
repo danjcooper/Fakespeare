@@ -29,7 +29,6 @@ const CheekySpeare = () => {
           e.target.style.display = 'none';
         }}
       />
-      <h1>cheeky cheeky</h1>
     </main>
   );
 };
