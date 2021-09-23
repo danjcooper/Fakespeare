@@ -12,8 +12,14 @@ const CreateRoomForm = ({ toggleLogin }) => {
     setName(e.target.value.toUpperCase());
   };
 
-  const handleNumberChange = (e) => {
-    setNnoOfBooks(e.target.value);
+  const handleNumberChange = (e, operation) => {
+    if (operation === '+' && noOfBooks + 1 <= 10) {
+      setNnoOfBooks((prevState) => prevState + 1);
+    } else if (operation === '-' && noOfBooks - 1 > 0) {
+      setNnoOfBooks((prevState) => prevState - 1);
+    } else {
+      return;
+    }
   };
 
   const handleSubmit = (e) => {
@@ -55,13 +61,24 @@ const CreateRoomForm = ({ toggleLogin }) => {
           value={name}
           required
         />
-        <input
-          type='number'
-          max='10'
-          min='1'
-          onChange={handleNumberChange}
-          value={noOfBooks}
-        />
+        <h2>Rounds</h2>
+        <section id='book-counter'>
+          <button
+            className='counter-button -'
+            onClick={(e) => handleNumberChange(e, '-')}
+            type='button'
+          >
+            -
+          </button>
+          <section className='counter-num'>{noOfBooks}</section>
+          <button
+            className='counter-button +'
+            onClick={(e) => handleNumberChange(e, '+')}
+            type='button'
+          >
+            +
+          </button>
+        </section>
         <button id='submit-button' type='submit'>
           Start!
         </button>
