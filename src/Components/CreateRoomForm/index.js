@@ -62,7 +62,7 @@ const CreateRoomForm = ({ toggleLogin }) => {
           value={name}
           required
         />
-        <h2>Rounds</h2>
+        <h2 className='close-head'>Rounds</h2>
         <section id='book-counter'>
           <button
             className='counter-button -'
