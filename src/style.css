@@ -40,6 +40,7 @@ main {
   flex-direction: column;
 
   position: relative;
+  overflow: hidden;
 }
 
 input,
@@ -251,6 +252,10 @@ table {
 }
 #counter-num p {
   display: inline;
+}
+
+#fk-container {
+  overflow: hidden;
 }
 
 @media only screen and (min-width: 500px) {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import { CheekySpeare } from '..';
 const helpers = require('../../helpers');
 
 const CreateRoomForm = ({ toggleLogin }) => {
@@ -99,6 +100,7 @@ const CreateRoomForm = ({ toggleLogin }) => {
           }}
         />
       ) : null}
+      <CheekySpeare />
     </main>
   );
 };

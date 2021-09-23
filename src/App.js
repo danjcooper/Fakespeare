@@ -3,6 +3,7 @@ import {
   CreateRoomForm,
   JoinRoomForm,
   Nav,
+  CheekySpeare,
   BookRoulette,
   CountdownBar,
   GameRoundEnd,
@@ -41,7 +42,7 @@ function App() {
           <Game />
         </Route>
         <Route exact path='/testing'>
-          <Waiting bookFacts={'1:fact one goes here 2:fact two goes here'} />
+          <CheekySpeare />
         </Route>
         <Route>
           <h1>404, not found</h1>

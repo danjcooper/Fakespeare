@@ -10,3 +10,4 @@ export { default as Loader } from './Loader';
 export { default as BookRoulette } from './BookRoulette';
 export { default as CountdownBar } from './CountdownBar';
 export { default as Waiting } from './Waiting';
+export { default as CheekySpeare } from './CheekySpeare';
