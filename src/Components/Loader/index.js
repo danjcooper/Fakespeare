@@ -9,11 +9,7 @@ function Loader() {
     reset: true,
   });
 
-  return (
-    <main>
-      <h1>loading</h1>
-    </main>
-  );
+  return <main></main>;
 }
 
 export default Loader;
