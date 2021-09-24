@@ -4,6 +4,8 @@ import {
   GameGuessingComponent,
   GameResults,
   GameRoundEnd,
+  RoundNumberDisplay,
+  GameEnd,
   Loader,
   Waiting,
 } from '../../Components';
@@ -32,6 +34,7 @@ const Game = () => {
   const [playerList, setPlayerList] = useState(location.state.playerList);
   const [noOfBooks, setNoOfBooks] = useState(location.state.noOfBooks);
   const [roundNumber, setRoundNumber] = useState(0);
+  const [roundNumberDisplay, setRoundNumberDisplay] = useState('');
   const [roundAnswers, setRoundAnswers] = useState([]);
   const [roundGuesses, setRoundGuesses] = useState([]);
   const [booksSent, setBooksSent] = useState(false);
@@ -233,6 +236,12 @@ const Game = () => {
     };
   }, [books]);
 
+  useEffect(() => {
+    const numOfRounds = books.length;
+    const currentRound = roundNumber + 1;
+    setRoundNumberDisplay(`Round ${currentRound}/${numOfRounds}`);
+  }, [roundNumber, books]);
+
   const handleAnswer = (e) => {
     let answer = e.target.answer.value;
     let lastChar = answer.charAt(answer.length - 1);
@@ -319,22 +328,28 @@ const Game = () => {
 
       case GAME_STATUS.ANSWERING:
         return books.length > 0 ? (
-          <GameAnswerSubmit
-            bookInfo={books[roundNumber]}
-            handleSubmit={handleAnswer}
-          />
+          <>
+            <RoundNumberDisplay display={roundNumberDisplay} />
+            <GameAnswerSubmit
+              bookInfo={books[roundNumber]}
+              handleSubmit={handleAnswer}
+            />
+          </>
         ) : (
           <Loader />
         );
 
       case GAME_STATUS.GUESSING:
         return roundAnswers.length > 0 ? (
-          <GameGuessingComponent
-            handleGuessSubmit={handleGuessSubmit}
-            answers={roundAnswers}
-            correctAnswer={books[roundNumber]}
-            userName={userName}
-          />
+          <>
+            <RoundNumberDisplay display={roundNumberDisplay} />
+            <GameGuessingComponent
+              handleGuessSubmit={handleGuessSubmit}
+              answers={roundAnswers}
+              correctAnswer={books[roundNumber]}
+              userName={userName}
+            />
+          </>
         ) : (
           <Loader />
         );
@@ -349,10 +364,13 @@ const Game = () => {
 
       case GAME_STATUS.ROUND_END:
         return roundAnswers[0].selectedBy ? (
-          <GameRoundEnd
-            answers={roundAnswers}
-            advanceGame={renderResultsComponent}
-          />
+          <>
+            <RoundNumberDisplay display={roundNumberDisplay} />
+            <GameRoundEnd
+              answers={roundAnswers}
+              advanceGame={renderResultsComponent}
+            />
+          </>
         ) : (
           <Loader />
         );
@@ -365,7 +383,7 @@ const Game = () => {
         );
 
       case GAME_STATUS.GAME_END:
-        return <h1>Game End</h1>;
+        return <GameEnd results={gameData} />;
 
       default:
         return <Loader />;
