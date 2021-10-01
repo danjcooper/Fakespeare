@@ -358,7 +358,6 @@ const Game = () => {
         return (
           <>
             <Waiting bookFacts={books[roundNumber].notes} />
-            <Loader />
           </>
         );
 
