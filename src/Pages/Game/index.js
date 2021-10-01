@@ -329,7 +329,6 @@ const Game = () => {
       case GAME_STATUS.ANSWERING:
         return books.length > 0 ? (
           <>
-            <RoundNumberDisplay display={roundNumberDisplay} />
             <GameAnswerSubmit
               bookInfo={books[roundNumber]}
               handleSubmit={handleAnswer}
