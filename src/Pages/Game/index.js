@@ -342,7 +342,6 @@ const Game = () => {
       case GAME_STATUS.GUESSING:
         return roundAnswers.length > 0 ? (
           <>
-            <RoundNumberDisplay display={roundNumberDisplay} />
             <GameGuessingComponent
               handleGuessSubmit={handleGuessSubmit}
               answers={roundAnswers}
@@ -364,7 +363,6 @@ const Game = () => {
       case GAME_STATUS.ROUND_END:
         return roundAnswers[0].selectedBy ? (
           <>
-            <RoundNumberDisplay display={roundNumberDisplay} />
             <GameRoundEnd
               answers={roundAnswers}
               advanceGame={renderResultsComponent}
